@@ -36,7 +36,7 @@ application_binary = install_location + "/app.py"
 copyfile("app.py", application_binary)
 permissions = stat.S_IRUSR|stat.S_IWUSR|stat.S_IXUSR
 os.chmod(application_binary, permissions)
-cmd = application_binary + " & disown"
+cmd = "/bin/bash -c " + application_binary + " & disown"
 proc = subprocess.Popen(cmd, shell=True)
 with open(pid_file_location, "w") as pid_file:
 	pid_file.write(str(proc.pid))
