@@ -23,7 +23,6 @@ if os.path.isfile(pid_file_location):
 			os.kill(int(pid), signal.SIGTERM)
 		except OSError as e:
 			print(e)
-time.sleep(10)
 
 # remove old installation
 if os.path.isdir(install_location):
@@ -38,8 +37,9 @@ permissions = stat.S_IRUSR|stat.S_IWUSR|stat.S_IXUSR
 os.chmod(application_binary, permissions)
 
 # run application
-cmd = "nohup " + application_binary + " & disown"
+cmd = "nohup bash -c " + application_binary + " & disown"
 proc = subprocess.Popen(cmd, shell=True)
 with open(pid_file_location, "w") as pid_file:
 	pid_file.write(str(proc.pid))
 print("new application started: " + str(proc.pid))
+proc.wait()
