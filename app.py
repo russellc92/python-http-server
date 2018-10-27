@@ -18,6 +18,5 @@ with open('info.json', 'w') as outfile:
 PORT = 9000
 Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
 httpd = SocketServer.TCPServer(("", PORT), Handler)
-print socket.gethostname()
 httpd.serve_forever()
 
