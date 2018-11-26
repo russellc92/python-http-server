@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-http-server
+  labels:
+    app: python-http-server
+spec:
+  selector:
+    matchLabels:
+      app: python-http-server
+  template:
+    metadata:
+      labels:
+        app: python-http-server
+    spec:
+      containers:
+      - name: python-http-server
+        image: bobcrutchley/python-http-server:latest
+        ports:
+        - name: http-port
+          containerPort: 9000
